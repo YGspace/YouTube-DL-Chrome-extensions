@@ -48,6 +48,8 @@ Built with a simple, spaghetti-style codebase, it delivers fast and effective fu
 
 1. Click the extension icon → Settings  
 2. Input the following:
+![image](https://github.com/user-attachments/assets/f51a41ea-42fa-413e-b822-03fc2d683aed)
+
    - **NAS URL**: e.g., `http://your-nas.synology.me:9998`
    - **User ID** / **Password**
    - **Default Resolution**
