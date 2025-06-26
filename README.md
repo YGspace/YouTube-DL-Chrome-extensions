@@ -1,6 +1,7 @@
 # 📦 Synology NAS Downloader - Chrome Extension
 
-A modern, class-based Chrome extension that allows you to download videos directly to your **Synology NAS** using the `youtube-dl-nas` Docker container. Right-click any video link or use the popup interface to queue downloads instantly.
+A lightweight, class-based Chrome extension that allows you to download videos directly to your Synology NAS using the youtube-dl-nas Docker container.  
+Built with a simple, spaghetti-style codebase, it delivers fast and effective functionality — just right-click any video link or use the popup interface to queue downloads instantly.
 
 ---
 
