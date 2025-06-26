@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NAS Downloader 설정</title>
+    <style>
+        /* Apple-inspired Design System */
+        :root {
+            --primary-color: #007AFF;
+            --primary-hover: #0056CC;
+            --success-color: #34C759;
+            --error-color: #FF3B30;
+            --warning-color: #FF9500;
+            --background-primary: #FFFFFF;
+            --background-secondary: #F2F2F7;
+            --background-tertiary: #E5E5EA;
+            --text-primary: #000000;
+            --text-secondary: #8E8E93;
+            --text-tertiary: #C7C7CC;
+            --border-color: #C6C6C8;
+            --shadow-light: 0 1px 3px rgba(0, 0, 0, 0.1);
+            --shadow-medium: 0 4px 12px rgba(0, 0, 0, 0.15);
+            --shadow-heavy: 0 8px 24px rgba(0, 0, 0, 0.2);
+            --border-radius-small: 8px;
+            --border-radius-medium: 12px;
+            --border-radius-large: 16px;
+            --spacing-xs: 4px;
+            --spacing-sm: 8px;
+            --spacing-md: 16px;
+            --spacing-lg: 24px;
+            --spacing-xl: 32px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', Arial, sans-serif;
+            background: var(--background-secondary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            padding: var(--spacing-lg);
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: var(--background-primary);
+            border-radius: var(--border-radius-large);
+            box-shadow: var(--shadow-medium);
+            overflow: hidden;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-hover));
+            color: white;
+            padding: var(--spacing-xl);
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: var(--spacing-sm);
+            letter-spacing: -0.5px;
+        }
+
+        .header p {
+            font-size: 16px;
+            opacity: 0.9;
+            font-weight: 400;
+        }
+
+        /* Form Section */
+        .form-section {
+            padding: var(--spacing-xl);
+        }
+
+        .form-group {
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .form-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: var(--spacing-sm);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: var(--spacing-md);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius-small);
+            font-size: 16px;
+            font-family: inherit;
+            background: var(--background-primary);
+            color: var(--text-primary);
+            transition: all 0.2s ease;
+            box-shadow: var(--shadow-light);
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.1);
+        }
+
+        .form-input::placeholder {
+            color: var(--text-tertiary);
+        }
+
+        .form-select {
+            width: 100%;
+            padding: var(--spacing-md);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius-small);
+            font-size: 16px;
+            font-family: inherit;
+            background: var(--background-primary);
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: var(--shadow-light);
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%238E8E93' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            background-size: 16px;
+            padding-right: 40px;
+        }
+
+        .form-select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.1);
+        }
+
+        .help-text {
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-top: var(--spacing-xs);
+            font-weight: 400;
+        }
+
+        /* Buttons */
+        .button-group {
+            display: flex;
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-xl);
+        }
+
+        .btn {
+            flex: 1;
+            padding: var(--spacing-md);
+            border: none;
+            border-radius: var(--border-radius-small);
+            font-size: 16px;
+            font-weight: 600;
+            font-family: inherit;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: var(--shadow-medium);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-hover);
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-heavy);
+        }
+
+        .btn-secondary {
+            background: var(--background-tertiary);
+            color: var(--text-primary);
+        }
+
+        .btn-secondary:hover {
+            background: var(--border-color);
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-heavy);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        /* Status Messages */
+        .status {
+            margin-top: var(--spacing-lg);
+            padding: var(--spacing-md);
+            border-radius: var(--border-radius-small);
+            font-size: 14px;
+            font-weight: 500;
+            text-align: center;
+            border: 1px solid;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .status.success {
+            background: rgba(52, 199, 89, 0.1);
+            color: var(--success-color);
+            border-color: rgba(52, 199, 89, 0.2);
+        }
+
+        .status.error {
+            background: rgba(255, 59, 48, 0.1);
+            color: var(--error-color);
+            border-color: rgba(255, 59, 48, 0.2);
+        }
+
+        .status.info {
+            background: rgba(0, 122, 255, 0.1);
+            color: var(--primary-color);
+            border-color: rgba(0, 122, 255, 0.2);
+        }
+
+        /* Info Sections */
+        .info-section {
+            background: var(--background-secondary);
+            padding: var(--spacing-lg);
+            margin-top: var(--spacing-lg);
+        }
+
+        .info-section h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: var(--spacing-md);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+
+        .info-section p {
+            color: var(--text-secondary);
+            margin-bottom: var(--spacing-md);
+            font-size: 14px;
+        }
+
+        .usage-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .usage-list li {
+            padding: var(--spacing-sm) 0;
+            border-bottom: 1px solid var(--background-tertiary);
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .usage-list li:last-child {
+            border-bottom: none;
+        }
+
+        .usage-list strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            body {
+                padding: var(--spacing-md);
+            }
+            
+            .button-group {
+                flex-direction: column;
+            }
+            
+            .header {
+                padding: var(--spacing-lg);
+            }
+            
+            .form-section {
+                padding: var(--spacing-lg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>🔗 NAS Downloader</h1>
+            <p>Synology NAS 설정</p>
+        </div>
+
+        <!-- Form Section -->
+        <div class="form-section">
+            <form id="settingsForm">
+                <div class="form-group">
+                    <label class="form-label" for="nasUrl">NAS 주소</label>
+                    <input type="text" id="nasUrl" class="form-input" placeholder="http://your-nas.synology.me:9998" required>
+                    <div class="help-text">예: http://your-nas.synology.me:9998</div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" for="userId">사용자 ID</label>
+                    <input type="text" id="userId" class="form-input" placeholder="사용자 ID를 입력하세요" required>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" for="userPw">비밀번호</label>
+                    <input type="password" id="userPw" class="form-input" placeholder="비밀번호를 입력하세요" required>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" for="resolution">기본 해상도</label>
+                    <select id="resolution" class="form-select">
+                        <option value="best">최고 품질</option>
+                        <option value="2160p">4K (2160p)</option>
+                        <option value="1440p">1440p</option>
+                        <option value="1080p">Full HD (1080p)</option>
+                        <option value="720p">HD (720p)</option>
+                        <option value="480p">480p</option>
+                        <option value="360p">360p</option>
+                        <option value="240p">240p</option>
+                        <option value="144p">144p</option>
+                        <option value="audio-m4a">오디오만 (M4A)</option>
+                        <option value="audio-mp3">오디오만 (MP3)</option>
+                    </select>
+                </div>
+                
+                <div class="button-group">
+                    <button type="submit" class="btn btn-primary">설정 저장</button>
+                    <button type="button" id="testConnection" class="btn btn-secondary">연결 테스트</button>
+                </div>
+            </form>
+            
+            <div id="status" class="status" style="display: none;"></div>
+        </div>
+
+        <!-- Info Section -->
+        <div class="info-section">
+            <h3>📖 사용 방법</h3>
+            <ul class="usage-list">
+                <li><strong>우클릭 메뉴:</strong> 웹페이지에서 링크나 비디오를 우클릭하면 "NAS에 저장" 메뉴가 나타납니다.</li>
+                <li><strong>지원 사이트:</strong> YouTube, Vimeo 등 youtube-dl이 지원하는 모든 사이트에서 사용 가능합니다.</li>
+                <li><strong>자동 다운로드:</strong> 요청한 동영상은 NAS의 지정된 폴더에 자동으로 저장됩니다.</li>
+                <li><strong>해상도 선택:</strong> 설정에서 기본 해상도를 지정할 수 있습니다.</li>
+            </ul>
+        </div>
+    </div>
+    
+    <script src="options.js"></script>
+</body>
+</html> 

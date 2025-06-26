@@ -1,0 +1,37 @@
+{
+  "manifest_version": 3,
+  "name": "Synology NAS Downloader",
+  "version": "1.0.0",
+  "description": "웹서핑 중 우클릭으로 동영상을 시놀로지 NAS에 다운로드",
+  
+  "permissions": [
+    "storage",
+    "contextMenus",
+    "background",
+    "activeTab",
+    "scripting",
+    "notifications"
+  ],
+  
+  "host_permissions": [
+    "http://*/*",
+    "https://*/*"
+  ],
+  
+  "background": {
+    "service_worker": "background.js"
+  },
+  
+  "options_page": "options.html",
+  
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  
+  "action": {
+    "default_title": "Synology NAS Downloader",
+    "default_popup": "popup.html"
+  }
+} 
