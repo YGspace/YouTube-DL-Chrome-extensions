@@ -1,228 +1,187 @@
-Synology NAS Downloader Chrome Extension
-A Chrome extension that integrates with the youtube-dl-nas server on Synology NAS, allowing you to download videos via right-click while browsing the web.
+# 📦 Synology NAS Downloader - Chrome Extension
 
-🚀 Key Features
-Right-click Menu: When right-clicking a link or video on a webpage, a "Save to NAS" menu appears
+A modern, class-based Chrome extension that allows you to download videos directly to your **Synology NAS** using the `youtube-dl-nas` Docker container. Right-click any video link or use the popup interface to queue downloads instantly.
 
-Popup Interface: Click the extension icon to input a URL and start downloading
+---
 
-Supports Various Resolutions: From best quality to 144p, including audio-only download options
+## 🚀 Features
 
-Connection Status Indicator: Check NAS connection status in real-time
+- **🖱️ Context Menu Integration**:  
+  Right-click any video or link → "Save to NAS"
 
-Quick Actions: Instantly fetch current page URL or clipboard URL
+- **🔲 Popup Interface**:  
+  Manual URL input + resolution selection + clipboard/page auto-fill
 
-Clean Code Architecture: Modular class-based structure for improved maintainability
+- **📶 Real-Time Status**:  
+  Displays connection and login status to your NAS
 
-📋 Requirements
-Chrome browser (Manifest V3 support)
+- **🎞️ Resolution Options**:  
+  Full range from `2160p` to `144p`, including `audio-mp3/m4a`
 
-youtube-dl-nas Docker container running on Synology NAS
+- **🛠 Modular Codebase**:  
+  ES6+ class-based architecture, clear separation of concerns
 
-A network environment with access to the NAS
+- **🔐 Secure Credentials**:  
+  Stored securely in Chrome local storage
 
-🔧 Installation Guide
-1. Load the Extension
-In Chrome, go to chrome://extensions/
+---
 
-Enable "Developer mode" in the top-right corner
+## 🧰 Requirements
 
-Click "Load unpacked"
+- Chrome Browser (Manifest V3 support)  
+- Synology NAS with `youtube-dl-nas` Docker container  
+- Public NAS address (e.g., `http://your-nas.synology.me:9998`)
 
-Select the my-nas-extension folder
+---
 
-2. Configuration
-Click the extension icon
+## 🧭 Installation
 
-Click the "Settings" button
+1. Clone or download this repository  
+2. Open `chrome://extensions/` in Chrome  
+3. Enable **Developer Mode**  
+4. Click **Load Unpacked** and select the `my-nas-extension/` folder
 
-Enter the following information:
+---
 
-NAS Address: http://your-nas.synology.me:9998
+## ⚙️ Configuration
 
-User ID: MY_ID configured during Docker setup
+1. Click the extension icon → Settings  
+2. Input the following:
+   - **NAS URL**: e.g., `http://your-nas.synology.me:9998`
+   - **User ID** / **Password**
+   - **Default Resolution**
+3. Save Settings and click **Test Connection**
 
-Password: MY_PW configured during Docker setup
+---
 
-Default Resolution: Choose your preferred resolution
+## 🎯 How to Use
 
-Click "Save Settings"
+### 🔸 Right-click Method
+- Navigate to any video page (YouTube, Vimeo, etc.)  
+- Right-click → **Save to NAS**
 
-Confirm settings via "Connection Test"
+### 🔹 Popup Method
+- Open the extension popup  
+- Enter or auto-fill a video URL  
+- Select resolution  
+- Click **Download**
 
-🎯 How to Use
-Using the Right-click Menu
-Right-click a video link on supported sites such as YouTube, Vimeo
+---
 
-Select "Save to NAS" from the context menu
+## 🏗 Code Architecture
 
-A download request is automatically sent
+```
+background.js (service worker)
+├── ConfigManager         # Load/save config
+├── UrlProcessor         # Extract and validate URLs
+├── NasApiClient         # Communicate with NAS API
+├── DownloadManager      # Request download handling
+├── NotificationManager  # System alerts
+├── ContextMenuManager   # Right-click menu setup
+└── MessageHandler       # Handle extension messages
 
-Using the Popup
-Click the extension icon
+options.js
+├── OptionsConfigManager # Form UI + storage
+├── ConnectionTester     # Test NAS login status
+└── OptionsMessageHandler
 
-Enter a URL (or use "Current Page" / "Clipboard" buttons)
+popup.js
+└── PopupManager         # Manage popup UI and download flow
+```
 
-Select resolution
+---
 
-Click "Start Download"
+## 🔍 File Structure
 
-🏗️ Architecture
-Class-based Modular Structure
-graphql
-복사
-편집
-Background Service Worker (background.js)
-├── ConfigManager          # Settings management
-├── UrlProcessor          # URL utility functions
-├── NasApiClient          # Communication with NAS API
-├── NotificationManager   # Notification management
-├── DownloadManager       # Download request handling
-├── ContextMenuManager    # Context menu handling
-└── MessageHandler        # Message handling
-
-Options Page (options.js)
-├── OptionsConfigManager  # Options page management
-├── ConnectionTester      # Connection testing
-└── OptionsMessageHandler # Message handling
-
-Popup (popup.js)
-└── PopupManager          # Popup interface management
-Major Improvements
-Constant Separation: All hardcoded strings moved to constants
-
-Improved Error Handling: Specific error messages and type-based handling
-
-Code Reusability: Shared logic extracted into utility classes
-
-Memory Optimization: Removed unnecessary logs and optimized memory usage
-
-Type Safety: Clear function signatures and return types
-
-Testability: Enhanced testability with pure functions and dependency injection
-
-🔗 Supported Sites
-Compatible with all sites supported by youtube-dl, including:
-
-YouTube
-
-Vimeo
-
-Dailymotion
-
-Facebook
-
-Twitter
-
-Instagram
-
-Over 1,000 other sites
-
-⚙️ Resolution Options
-best: Highest quality
-
-2160p: 4K (2160p)
-
-1440p: 1440p
-
-1080p: Full HD (1080p)
-
-720p: HD (720p)
-
-480p: 480p
-
-360p: 360p
-
-240p: 240p
-
-144p: 144p
-
-audio-m4a: Audio only (M4A)
-
-audio-mp3: Audio only (MP3)
-
-🛠️ Troubleshooting
-Connection Test Failure
-Verify the NAS address is correct
-
-Check if the port number is accurate
-
-Confirm the ID/password are correct
-
-Ensure the NAS is running
-
-Download Request Failure
-Make sure the URL is valid
-
-Check if the site is supported by youtube-dl
-
-Verify that the NAS has sufficient disk space
-
-Permission Errors
-Ensure all required extension permissions are granted
-
-Update Chrome to the latest version
-
-📁 File Structure
-perl
-복사
-편집
+```
 my-nas-extension/
-├── manifest.json          # Extension manifest
-├── background.js          # Background service worker (class-based)
-├── popup.html             # Popup interface
-├── popup.js               # Popup logic (PopupManager class)
-├── options.html           # Settings page
-├── options.js             # Settings logic (OptionsConfigManager class)
-├── icons/                 # Icon files
+├── manifest.json
+├── background.js
+├── options.html
+├── options.js
+├── popup.html
+├── popup.js
+├── icons/
 │   ├── icon16.png
 │   ├── icon48.png
 │   └── icon128.png
-└── README.md              # This file
-🔒 Security
-All communication is encrypted via HTTPS
+└── README.md
+```
 
-Passwords are stored securely in Chrome storage
+---
 
-Session management via cookie-based authentication
+## 🌐 Supported Sites
 
-CORS policy compliance
+All sites supported by `youtube-dl`, including:
 
-Input validation and XSS protection
+- YouTube
+- Vimeo
+- Twitter
+- Facebook
+- Instagram
+- Dailymotion
+- Over 1000+ platforms
 
-🧪 Development Guide
-Code Style
-ES6+ class-based structure
+---
 
-Constants defined in uppercase
+## 🎞 Resolution Options
 
-Function names in camelCase
+| Option        | Description               |
+|---------------|---------------------------|
+| `best`        | Highest available quality |
+| `2160p`       | 4K UHD                    |
+| `1440p`       | 2K                        |
+| `1080p`       | Full HD                   |
+| `720p`        | HD                        |
+| `480p`        | SD                        |
+| `360p`        | Low                       |
+| `240p` / `144p` | Very low                 |
+| `audio-mp3`   | Audio only (MP3)          |
+| `audio-m4a`   | Audio only (M4A)          |
 
-Class names in PascalCase
+---
 
-JSDoc-style comments
+## 🧪 Troubleshooting
 
-Debugging
-Use Chrome DevTools Console tab to inspect logs
+### ❌ Cannot Connect to NAS
+- Verify NAS URL and port
+- Check Docker container is running
+- Ensure correct ID/PW
 
-Monitor API requests/responses via Network tab
+### ❌ Download Fails
+- Validate the URL
+- Check NAS storage availability
+- Confirm the target site is supported by youtube-dl
 
-Check storage state in the Application tab
+---
 
-Extension Development
-Add new methods to relevant classes for new features
+## 🛡 Security
 
-Extract shared logic into utility classes
+- ✅ Password stored in Chrome local storage (not in plain DOM)
+- ✅ HTTPS communication with NAS (if configured)
+- ✅ Session managed with cookies
+- ✅ XSS-safe DOM updates
+- ✅ Clean error handling and logs
 
-Always use try-catch blocks for error handling
+---
 
-📝 License
+## 🧑‍💻 Developer Notes
+
+- Built with modular ES6+ classes  
+- `console.log` used for structured debug  
+- All async tasks use `try-catch`  
+- Utility-first, reusable components  
+- Easy to extend (e.g., add new API endpoints or UI states)
+
+---
+
+## 📝 License
+
 MIT License
 
-🤝 Contributing
-Please submit bug reports or feature suggestions via GitHub Issues.
+---
 
-📞 Support
-GitHub: https://github.com/hyeonsangjeon/youtube-dl-nas
+## 📞 References
 
-Docker Hub: https://hub.docker.com/r/modenaf360/youtube-dl-nas/
+- GitHub: [hyeonsangjeon/youtube-dl-nas](https://github.com/hyeonsangjeon/youtube-dl-nas)  
+- Docker Hub: [modenaf360/youtube-dl-nas](https://hub.docker.com/r/modenaf360/youtube-dl-nas/)
