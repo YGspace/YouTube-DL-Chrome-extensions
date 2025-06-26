@@ -31,7 +31,7 @@ Built with a simple, spaghetti-style codebase, it delivers fast and effective fu
 
 - Chrome Browser (Manifest V3 support)  
 - Synology NAS with `youtube-dl-nas` Docker container  
-- Public NAS address (e.g., `http://your-nas.synology.me:9998`)
+- Public NAS address (e.g., `http://your-nas.synology.me:1234`)
 
 ---
 
@@ -49,7 +49,7 @@ Built with a simple, spaghetti-style codebase, it delivers fast and effective fu
 1. Click the extension icon → Settings  
 2. Input the following:
 
-   - **NAS URL**: e.g., `http://your-nas.synology.me:9998`
+   - **NAS URL**: e.g., `http://your-nas.synology.me:port`
    - **User ID** / **Password**
    - **Default Resolution**
 
