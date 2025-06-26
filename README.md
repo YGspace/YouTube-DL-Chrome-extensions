@@ -158,26 +158,6 @@ All sites supported by `youtube-dl`, including:
 
 ---
 
-## 🛡 Security
-
-- ✅ Password stored in Chrome local storage (not in plain DOM)
-- ✅ HTTPS communication with NAS (if configured)
-- ✅ Session managed with cookies
-- ✅ XSS-safe DOM updates
-- ✅ Clean error handling and logs
-
----
-
-## 🧑‍💻 Developer Notes
-
-- Built with modular ES6+ classes  
-- `console.log` used for structured debug  
-- All async tasks use `try-catch`  
-- Utility-first, reusable components  
-- Easy to extend (e.g., add new API endpoints or UI states)
-
----
-
 ## 📝 License
 
 MIT License
