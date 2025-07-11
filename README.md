@@ -10,8 +10,14 @@ Built with a simple, spaghetti-style codebase, it delivers fast and effective fu
 - **🖱️ Context Menu Integration**:  
   Right-click any video or link → "Save to NAS"
 
+  <img width="167" height="379" alt="image" src="https://github.com/user-attachments/assets/07009741-bb9b-41ce-bc53-ee114a20237f" />
+
+
 - **🔲 Popup Interface**:  
   Manual URL input + resolution selection + clipboard/page auto-fill
+
+  <img width="493" height="637" alt="image" src="https://github.com/user-attachments/assets/81c9ce0e-b16d-4260-b46f-a6002724f41d" />
+
 
 - **📶 Real-Time Status**:  
   Displays connection and login status to your NAS
